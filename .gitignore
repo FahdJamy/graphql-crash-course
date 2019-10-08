@@ -1,0 +1,94 @@
+# dependencies
+/.pnp
+.pnp.js
+
+# misc
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+.DS_Store
+
+# OS X
+.DS_Store*
+Icon?
+._*
+.vscode-janus-debug
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+.directory
+*~
+dist
+
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# images
+*.jpeg
+*.png
+
+# Coverage directory
+coverage
+/client/coverage
+/server/coverage
+/server/upload/images
+*.test.js.snap
+
+#build
+build
+dist-server
+dist-client
+.cache
+
+# Dependency directory
+node_modules
+
+# npm
+.npm
+package-lock.json
+yarn.lock
+
+# Optional REPL history
+.node_repl_history
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# private files
+.env
+dist/
+.nyc_output/
+yarn-error.log
+nodemon.json
+
+# Vscode
+.vscode
+
+# Intellij
+.idea/
+
+.editorConfig
+data/
+/.elasticbeanstalk/config.yml
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+!/client/__tests__/common/stakeholders/dataGenerationFixtures.js
+/.elasticbeanstalk/config.yml
+nohup.out
+ubuntu*
