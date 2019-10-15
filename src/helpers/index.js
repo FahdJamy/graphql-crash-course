@@ -1,2 +1,2 @@
-export { authentication } from "./auth.helpers";
+export { getUserDecodingToken } from "./auth.helpers";
 export { context } from "./context";

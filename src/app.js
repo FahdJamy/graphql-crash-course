@@ -1,28 +1,37 @@
 import express from "express";
-const { ApolloServer, gql } = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server-express');
 import cors from "cors";
-// import graphQlHttp from "express-graphql";
 import log from "fancy-log";
 import mongoose from "mongoose";
-import { resolvers, apolloResolvers } from "./graphql/resolvers";
-import { schema, typeDefs } from "./graphql/schema";
-import { context } from "./helpers";
+import { apolloResolvers } from "./graphql/resolvers";
+import { typeDefs } from "./graphql/schema";
+import { getUserDecodingToken } from "./helpers";
+import { UpperCaseDirective, DateFormatDirective } from "./graphql/directive";
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-// app.use('/graphql', graphQlHttp({
-//   schema: schema,
-//   rootValue: resolvers,
-//   graphiql: true,
-// }));
-
 const server = new ApolloServer({
   typeDefs,
+  schemaDirectives: {
+    upperCase: UpperCaseDirective,
+    date: DateFormatDirective,
+  },
   resolvers: apolloResolvers,
-  context: context,
+  context: async ({ req }) => {
+    let currentUser = null;
+    const tokenWithBearer = req.headers.authorization || '';
+
+    try {
+      const token = tokenWithBearer.split(' ')[1];
+      if (token) currentUser = await getUserDecodingToken(token);
+    } catch (e) {
+      log(e);
+    }
+    return { currentUser };
+  },
 });
 server.applyMiddleware({ app });
 

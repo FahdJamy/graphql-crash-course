@@ -17,5 +17,6 @@ export const apolloResolvers = {
   Mutation: {
     createEvent: eventResolver.createEvent,
     createUser: userResolvers.createUser,
+    bookEvent: bookingResolvers.bookEvent,
   },
 };

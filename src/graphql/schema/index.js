@@ -65,12 +65,17 @@ export const schema = buildSchema(`
 `);
 
 export const typeDefs = gql`
+  directive @upperCase on FIELD_DEFINITION
+  directive @date(format: String) on FIELD_DEFINITION
+
+  scalar Date
+
   type Event {
     _id: ID!
-    title: String!
+    title: String! @upperCase
     description: String!
     price: Float!
-    date: String!
+    date: Date @date(format: "mmmm d, yyyy")
     creator: User!
   }
 
@@ -114,21 +119,7 @@ export const typeDefs = gql`
     login(email: String!, password: String!): AuthData!
   }
 
-  # type RootQuery {
-  #   events: [Event!]!
-  #   bookings: [Booking!]!
-  #   login(email: String!, password: String!): AuthData!
-  # }
-
   type Mutation {
-    createEvent(eventInput: EventInput): Event!
-    createUser(userInput: UserInput): User
-    bookEvent(eventId: ID!): Booking!
-    cancelBooking(bookingId: ID!): Event!
-  }
-
-
-  type RootMutation {
     createEvent(eventInput: EventInput): Event!
     createUser(userInput: UserInput): User
     bookEvent(eventId: ID!): Booking!

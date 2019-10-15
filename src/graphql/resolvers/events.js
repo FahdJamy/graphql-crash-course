@@ -14,7 +14,6 @@ export default {
       .catch((err) => { throw err; });
   },
   createEvent: async (root, args, context) => {
-    console.log(context);
     if (!context.currentUser) { throw new Error('Please provide a valid token'); }
     const { eventInput : { title, description, price } } = args;
     const newEvent = new Event({
@@ -22,7 +21,7 @@ export default {
       description: description,
       price: +price,
       date: new Date().toISOString(),
-      creator: "5d9ef0329a646d7b2ff56e56",
+      creator: context.currentUser._id,
     })
     try {
       const result = await newEvent.save();
