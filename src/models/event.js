@@ -19,6 +19,10 @@ const eventSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-});
+  creator: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  }
+}, { timestamps: true });
 
 export default mongoose.model('Event', eventSchema);
