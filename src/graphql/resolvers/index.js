@@ -18,5 +18,6 @@ export const apolloResolvers = {
     createEvent: eventResolver.createEvent,
     createUser: userResolvers.createUser,
     bookEvent: bookingResolvers.bookEvent,
+    cancelBooking: bookingResolvers.cancelBooking,
   },
 };
